@@ -16,12 +16,12 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text.trim();
 
     // Simulação de lógica de login (substituir por lógica real posteriormente)
-    if (username == "admin" && password == "admin123") {
+    if (username == "admin" && password == "1234") {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => AdminDashboard()),
       );
-    } else if (username == "tesoureiro" && password == "senha123") {
+    } else if (username == "user" && password == "123") {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => UserDashboard()),
@@ -37,38 +37,110 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
         centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Usuário',
-                border: OutlineInputBorder(),
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        children: [
+          // Plano de fundo com imagem
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage('https://i.imgur.com/rRq4Kvs.png'),
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Senha',
-                border: OutlineInputBorder(),
+          ),
+          // Conteúdo da tela
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Bem-vindo',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 2,
+                          color: Colors.black45,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+
+                  // campos para inserir o usuario
+                  TextField(
+                    controller: _usernameController,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person,
+                          color: Colors.white), // Ícone de usuário
+                      labelText: 'Usuário',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        // Linha em vez de borda
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        // Linha em vez de borda (focada)
+                        borderSide: BorderSide(color: Colors.white, width: 2.5),
+                      ),
+                    ),
+                  ),
+
+                  // campos para inserir a senha
+                  SizedBox(height: 16.0), // Espaçamento entre os campos
+                  TextField(
+                    controller: _passwordController,
+                    style: TextStyle(color: Colors.white),
+                    obscureText: true, // Oculta a senha
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock,
+                          color: Colors.white), // Ícone de senha
+                      labelText: 'Senha',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        // Linha em vez de borda
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        // Linha em vez de borda (focada)
+                        borderSide: BorderSide(color: Colors.white, width: 2.5),
+                      ),
+                    ),
+                  ),
+
+                  // espaço
+                  SizedBox(height: 24.0),
+
+                  // Botão de entrar
+                  ElevatedButton(
+                    onPressed: _handleLogin,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding: EdgeInsets.symmetric(vertical: 14.0),
+                      textStyle: TextStyle(fontSize: 16.0),
+                    ),
+                    child: Text(
+                      'Entrar',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: _handleLogin,
-              child: Text('Entrar'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

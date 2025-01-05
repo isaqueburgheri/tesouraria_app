@@ -1,4 +1,4 @@
-package com.example.tesouraria_app
+package com.adbsetor63.tesouraria_app
 
 import io.flutter.embedding.android.FlutterActivity
 
