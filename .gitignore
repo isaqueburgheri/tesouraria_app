@@ -43,3 +43,19 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# Flutter/Dart related
+build/
+.idea/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.macos/
+.android/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+.DS_Store
+
+# Firebase keys or sensitive info (if applicable)
+*.keystore
